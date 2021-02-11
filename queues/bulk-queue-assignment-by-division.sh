@@ -20,7 +20,7 @@ gc queues list --pageSize=100 --name="MyQueueName" | jq -r .[].id
 cat users.json | jq -c '.[] | select( .division.name | contains("MyDivisionsName"))' | jq -n  '[inputs]'| jq > divisions-user.json
 
 # Step #4:  Find out the total number of users with that division
-cat divisions-user.json | jq .id | wc -l
+cat divisions-user.json | jq .[].id | wc -l
 
 # Step 5: You are going to iterate the total number of users/100 by 100.  If we have 5791 users that belong to a division, you are going to iterate 58 times.
 for i in {0..58}
