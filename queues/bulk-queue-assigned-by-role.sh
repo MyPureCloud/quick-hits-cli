@@ -17,7 +17,7 @@ gc users list --pageSize=100 --expand="authorization" | jq -c '.[] | select( .au
 gc queues list --pageSize=100 --name="MyQueueName" | jq -r .[].id
 
 # Step #3:  Find out the total number of users with that division
-cat authorizations-user.json | jq .id | wc -l
+cat authorizations-user.json | jq .[].id | wc -l
 
 # Step 4: You are going to iterate the total number of users/100 by 100.  If we have 5791 users that belong to a role, you are going to iterate 58 times.
 for i in {0..58}

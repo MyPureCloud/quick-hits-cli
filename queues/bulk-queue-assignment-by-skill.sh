@@ -20,7 +20,7 @@ gc queues list --pageSize=100 --name="MyQueueName" | jq -r .[].id
 cat users.json | jq -c '.[] | select( .skills[].name | contains("MySkillName"))' | jq -n  '[inputs]'| jq > skills-user.json
 
 # Step #4:  Find out the total number of users with that skill
-cat skills-user.json | jq .id | wc -l
+cat skills-user.json | jq .[].id | wc -l
 
 # Step 5: You are going to iterate the total number of users/100 by 100.  If we have 5791 users with a skill, you are going to iterate 58 times.
 for i in {0..58}
