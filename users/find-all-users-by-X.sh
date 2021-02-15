@@ -16,14 +16,16 @@ gc users list --pageSize=100 --expand="skills" | jq -c '.[] |  select( .skills[]
 # Get a list of all users by skill and convert the data to a csv file
 gc users list --pageSize=100 --expand="skills" | jq -c '.[] |  select( .skills[].name == "AcdSkill9")' |jq -n '[inputs]'|  jq -r '. | map({"id": .id, "division": .division.name, "email": .email})' | jq -r '(.[0] | keys_unsorted) as $keys | ([$keys] + map([.[ $keys[] ]])) [] | @csv'
 
-# Get a list of all of the user ids with their group information with their skill information
-gc users list --pageSize=100 --expand="groups" | jq -c '.[] |  select( .groups[].name  == "Group10")' | jq -r .id > skills-user.json
+# Get a list of all of the user ids with their group information 
+gc groups list |  jq -c '.[] | select (.name == "IRA")' | jq -r '. | .id'
+gc users list --expand="groups" | jq -c '.[] | select( .groups[].id == "231f7f33-faea-41c7-a04f-a4fd47eefcad")' | jq . > groups.json
  
 # Get a list of all users by group and convert the data to a csv file
-gc users list --pageSize=100 --expand="groups" | jq -c '.[] |  select( .groups[].name  == "Group10")' |jq -n '[inputs]'|  jq -r '. | map({"id": .id, "division": .division.name, "email": .email})' | jq -r '(.[0] | keys_unsorted) as $keys | ([$keys] + map([.[ $keys[] ]])) [] | @csv'
+gc groups list |  jq -c '.[] | select (.name == "IRA")' | jq -r '. | .id'
+gc users list --expand="groups" | jq -c '.[] | select( .groups[].id == "231f7f33-faea-41c7-a04f-a4fd47eefcad")' | jq . | jq -n '[inputs]'|  jq -r '. | map({"id": .id, "division": .division.name, "email": .email})' | jq -r '(.[0] | keys_unsorted) as $keys | ([$keys] + map([.[ $keys[] ]])) [] | @csv'
 
 # Get a list of all of the user ids with their division information with their skill information
-gc users list --pageSize=100 | jq -c '.[] |  select( .division.name  == "DivisionA")' | jq -r .id > skills-user.json
+gc users list --pageSize=100 | jq -c '.[] |  select( .division.name  == "DivisionA")' | jq -r .id > division-user.json
  
 # Get a list of all users by division and convert the data to a csv file
 gc users list --pageSize=100  | jq -c '.[] |  select(  .division.name  == "DivisionA")' |jq -n '[inputs]'|  jq -r '. | map({"id": .id, "division": .division.name, "email": .email})' | jq -r '(.[0] | keys_unsorted) as $keys | ([$keys] + map([.[ $keys[] ]])) [] | @csv'
