@@ -11,10 +11,10 @@
 ######
 
 # Step #1:   Get a list of all of the users with their authorization information
-gc users list --pageSize=100 --expand="authorization" | jq -c '.[] | select( .authorization.roles[].name | contains("Supervisor"))' | jq .id > authorizations-user.json
+gc users list -a --pageSize=100 --expand="authorization" | jq -c '.[] | select( .authorization.roles[].name | contains("Supervisor"))' | jq .id > authorizations-user.json
  
 # Step #2: Find the id of the Queue by retrieving all of the queues and using jq to parse the id of the file
-gc queues list --pageSize=100 --name="MyQueueName" | jq -r .[].id
+gc queues list -a --pageSize=100 --name="MyQueueName" | jq -r .[].id
 
 # Step #3:  Find out the total number of users with that division
 cat authorizations-user.json | jq .[].id | wc -l
