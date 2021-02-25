@@ -11,10 +11,10 @@
 ######
 
 # Step #1:   Get all of the users with their groups and redirect the output to a file.
-gc users list --pageSize=100 --expand="groups" > users.json
+gc users list -a --pageSize=100 --expand="groups" > users.json
 
 # Step #2: Find the id of the Queue by retrieving all of the queues and using jq to parse the id of the queue
-gc queues list --pageSize=100 --name="MyQueueName" | jq -r .[].id
+gc queues list -a --pageSize=100 --name="MyQueueName" | jq -r .[].id
 
 # Step #3:  Find all of the users who have those users with the skill and then dump them a list of files
 cat users.json | jq -c '.[] | select( .groups[].name | contains("MyGroupName"))' | jq -n  '[inputs]'| jq > groups-user.json
