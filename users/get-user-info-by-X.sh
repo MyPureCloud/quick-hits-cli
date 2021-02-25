@@ -1,5 +1,5 @@
 # Get sorted list of User Roles - Search by email
-gc users list --expand="authorization" | jq -cr 'first(.[] | select(.email == "user.email@example.com")) | .authorization.roles[].name' | sort --ignore-case
+gc users list -a --expand="authorization" | jq -cr 'first(.[] | select(.email == "user.email@example.com")) | .authorization.roles[].name' | sort --ignore-case
 
 ########
 # Composition:
@@ -8,7 +8,7 @@ gc users list --expand="authorization" | jq -cr 'first(.[] | select(.email == "u
 ########
 
 # Search for a user by email, then expand to get user data (xargs - supports multiple)
-gc users list | jq -rc '.[] | select(.email == "user.email@example.com") | .id' | xargs -I % gc users get % --expand authorization
+gc users list -a | jq -rc '.[] | select(.email == "user.email@example.com") | .id' | xargs -I % gc users get % --expand authorization
 
 # Search for a user by email, then expand to get user data (Command substitution)
-gc users get `gc users list  --expand authorization | jq -rc 'first(.[] | select(.email == "user.email@example.com")) | .id'`
+gc users get `gc users list -a  --expand authorization | jq -rc 'first(.[] | select(.email == "user.email@example.com")) | .id'`
