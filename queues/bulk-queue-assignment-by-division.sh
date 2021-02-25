@@ -11,10 +11,10 @@
 ######
 
 # Step #1:   Get a list of all of the users.  Division is a property already on the user object.
-gc users list --pageSize=100 > users.json
+gc users list -a --pageSize=100 > users.json
 
 # Step #2: Find the id of the Queue by retrieving all of the queues and using jq to parse the id of the file
-gc queues list --pageSize=100 --name="MyQueueName" | jq -r .[].id
+gc queues list -a --pageSize=100 --name="MyQueueName" | jq -r .[].id
 
 # Step #3:  Find all of the users who belong to the division and them to a file
 cat users.json | jq -c '.[] | select( .division.name | contains("MyDivisionsName"))' | jq -n  '[inputs]'| jq > divisions-user.json
