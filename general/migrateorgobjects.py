@@ -40,3 +40,4 @@ for action in actions:
   output,error = subprocess.Popen(['/bin/bash', '-c', cmd], stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
   print(error)
 
+## >> END migrate_objects
