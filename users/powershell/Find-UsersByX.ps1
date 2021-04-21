@@ -1,10 +1,9 @@
 # >> START Find-UsersByX: A set of Genesys Cloud CLI commands the will identify a user by role, division, group or skill.
 
 <# 
-    DESCRIPTION
+    .DESCRIPTION
         Example commands to search for all users by a role, division or group.
-    POWERSHELL_VERSION
-        PowerShell 5.1 and up unless stated otherwise. 
+        PowerShell v5.1 and up.
 #>
 
 # Get a list of all of the user IDs with a given role, then export to file.

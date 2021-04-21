@@ -1,4 +1,4 @@
-# >> START New-AcdSkill Examples of creating Skills with the CLI
+# >> START Export-AcdSkill Examples of creating Skills with the CLI
 
 <#
     DESCRIPTION
@@ -23,4 +23,4 @@ Get-ChildItem -Path ".\temp\*" -Include skill-*.json -Name |        # Take all t
     ForEach-Object { gc.exe -p DEST_OAUTH_CLIENT skills create -f $_ }
 
 
-# >> END New-AcdSkill
+# >> END Export-AcdSkill

@@ -1,12 +1,11 @@
 # >> START Request-UsageApi A set of Genesys Cloud CLI commands for querying the usage api.
 
 <#
-    DESCRIPTION    
+    .DESCRIPTION    
         This example will query the API usage by day for an entire week of time and map a summary of all status codes to a CSV file.
     
         For a further explanation on the usage API, please see: https://developer.mypurecloud.com/blog/2021-01-04-API-Usage/
-
-    POWERSHELL_VERSION
+        
         PowerShell v5.1 and up
 #>
 
