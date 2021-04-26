@@ -2,26 +2,35 @@ const execSync = require('child_process').execSync;
 
 let removeSkills = ['Juggling','Fire Breathing','Origami'];
 
-if(process.platform === 'linux'){
-    console.log('Working on it...');
-    // Loop through each skill to be deleted
-    removeSkills.forEach(skill => {
-        userData = execSync('gc users list -a --pageSize=100 --expand="skills" | jq -c -r \'[.[] | select(.skills[].name=="'+ skill +'")]\'');
+console.log('Working on it...');
 
-        var obj = JSON.parse(userData);
+// Loop through each skill to be deleted
+removeSkills.forEach(skill => {
+    let gcBuilder = 'gc';
+    let jqBuilder = 'jq -c -r \'[.[] | select(.skills[].name=="'+ skill +'")]\''
 
+    if(process.platform === 'win32') {
+        gcBuilder = 'gc.exe';
+        jqBuilder = 'jq -c -r "[.[] | select(.skills[].name==""'+ skill +'""")]"';
+    }
+
+    userData = execSync(''+ gcBuilder +' users list -a --pageSize=100 --expand="skills" | '+ jqBuilder +'');
+
+    var obj = JSON.parse(userData);
+
+    if(obj.length > 0) {
         // Loop through each user with skill
         obj.forEach(user => {
             skillArr = user.skills.find(x => x.name == skill);
 
             // Remove skill for each user
-            execSync('gc users skills delete '+ user.id +' '+ skillArr.id +'');
-            console.log('EXECUTING SCRIPT: gc users skills delete '+ user.id +' '+ skillArr.id +'');
+            execSync(''+ gcBuilder +' users skills delete '+ user.id +' '+ skillArr.id +'');
+            console.log('EXECUTING SCRIPT: '+ gcBuilder +' users skills delete '+ user.id +' '+ skillArr.id +'');
             console.log('Removed Skill ' + skill + ' for user ' + user.name+'');
 
             // Bulk add skills for each user
-            execSync('gc users skills bulkremove '+ user.id +' -f ./bulk-add-skills.json');
-            console.log('EXECUTING SCRIPT: gc users skills bulkremove '+ user.id +' -f ./bulk-add-skills.json');
+            execSync(''+ gcBuilder +' users skills bulkremove '+ user.id +' -f ./bulk-add-skills.json');
+            console.log('EXECUTING SCRIPT: '+ gcBuilder +' users skills bulkremove '+ user.id +' -f ./bulk-add-skills.json');
             console.log('Added Skills for user ' + user.name+'');
 
             // bulk-add-skills.json file contents
@@ -36,5 +45,5 @@ if(process.platform === 'linux'){
             //     }
             // ]
         });
-    });
-} else console.log('This script only runs on Linux');
+    } else console.log('No user found for skill ' + skill);
+});
