@@ -1,4 +1,4 @@
-# >> START Find-UsersByX: A set of Genesys Cloud CLI commands the will identify a user by role, division, group or skill.
+# >> START Find-UsersByX A set of Genesys Cloud CLI commands the will identify a user by role, division, group or skill.
 
 <# 
     .DESCRIPTION
@@ -32,4 +32,4 @@ $groupId = (gc.exe groups list -a | ConvertFrom-Json) | Where-Object name -eq "B
 # Get a list of all users by division and convert the data to a csv file
 (gc.exe users list -a --expand="skills" | ConvertFrom-Json) | Where-Object {$_.division.name -eq "DivisionA"} | Select-Object id, @{Name="division"; Expression={$_.division.name}}, email | Export-Csv -Path .\division_users.csv -NoTypeInformation
 
-# >> END 
+# >> END Find-UsersByX

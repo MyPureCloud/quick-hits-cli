@@ -1,4 +1,4 @@
-# >> START Start-QueueQueries
+# >> START Start-QueueQueries A set of Genesys Cloud CLI Queuries for queues
 
 <#
     .DESCRIPTION

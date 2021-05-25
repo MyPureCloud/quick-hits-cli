@@ -1,4 +1,4 @@
-# >> START Export-Queues
+# >> START Export-Queues Examples for creating and migrating queues via the Genesys Cloud CLI
 
 <#
     .DESCRIPTION

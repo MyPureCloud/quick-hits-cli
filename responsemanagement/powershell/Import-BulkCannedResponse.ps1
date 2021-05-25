@@ -1,4 +1,4 @@
-# >> START Import-BulkCannedResponse 
+# >> START Import-BulkCannedResponse Create a canned response using the Genesys Cloud CLI
 
 <#
     .DESCRIPTION

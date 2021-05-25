@@ -1,4 +1,4 @@
-# >> START Connect-NotificationsChannel.
+# >> START Connect-NotificationsChannel Subscribe to notification events from the command line
 
 <# 
     .DESCRIPTION
@@ -66,4 +66,4 @@ gc.exe notifications channels listen $channelId |
     }
 
 
-# >> END subscribe_to_notification_events
+# >> END Connect-NotificationsChannel

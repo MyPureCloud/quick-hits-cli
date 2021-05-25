@@ -1,4 +1,4 @@
-# >> START Request-UsageApi A set of Genesys Cloud CLI commands for querying the usage api.
+# >> START Request-UsageApi A set of Genesys Cloud CLI commands for querying the usage api
 
 <#
     .DESCRIPTION    
