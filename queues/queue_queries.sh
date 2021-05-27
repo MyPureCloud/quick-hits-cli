@@ -7,6 +7,6 @@ gc routing queues list -a --pageSize 100 | jq -r '. | sort_by(.memberCount,.name
 gc users list -a | jq -c '.[] | select( .username | contains("user24927@testme.test"))' |jq -r '. | .id' | xargs -I{} gc users queues list {} | jq -r '(.[0] | keys_unsorted) as $keys | ([$keys] + map([.[ $keys[] ]])) [] | @csv'
 
 #Get a list of user (details) for a specific queue when you don't know the id of the queue.  Dump some of the information to a CSV
-gc routing queues list -a |jq -c '.[] | select( .name | contains("jcc-chat6"))' | jq -r '. | .id' | xargs -I{} gc routing queues users get {} |jq -n '[inputs]'| jq -r '.[] | map({"id": .user.id, "username": .user.username})' | jq -r '(.[0] | keys_unsorted) as $keys | ([$keys] + map([.[ $keys[] ]])) [] | @csv'
+gc routing queues list -a |jq -c '.[] | select( .name | contains("jcc-chat6"))' | jq -r '. | .id' | xargs -I{} gc routing queues members get {} |jq -n '[inputs]'| jq -r '.[] | map({"id": .user.id, "username": .user.username})' | jq -r '(.[0] | keys_unsorted) as $keys | ([$keys] + map([.[ $keys[] ]])) [] | @csv'
 
 # >> END cli-queue-queries
