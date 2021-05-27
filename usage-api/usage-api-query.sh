@@ -7,7 +7,7 @@
 #  Also, for a further explanation on the usage API, please see: https://developer.mypurecloud.com/blog/2021-01-04-API-Usage/
 ##### 
 cat query-api-usage-for-week.json \
-  | gc usage query -t 10 \
+  | gc usage query create -t 10 \
   | jq -r '.results |   sort_by(.date,.clientName)' \
   | jq -r '. | map({date: .date, clientName: .clientName, templateUri: .templateUri, requests: .requests, status200: .status200, status300: .status300, status400: .status400, status429: .status429, status500: .status500})' \
   | jq -r '(.[0] | keys_unsorted) as $keys | ([$keys] + map([.[ $keys[] ]])) [] | @csv'

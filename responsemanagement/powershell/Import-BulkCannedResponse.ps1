@@ -10,7 +10,7 @@
 # Step 1:  Create the Libraries 
 ####
 Write-Output '{"name": "Bulk Example Library","version": 1}' | 
-    gc.exe responsemgt libraries create 
+    gc.exe responsemanagement libraries create 
 
 ####
 # Step 2: From the response, copy the Id generated for your new Library:
@@ -59,7 +59,7 @@ Write-Output '{"name": "Bulk Example Library","version": 1}' |
 Get-ChildItem -Path ".\*" -Include canned*.json |  
     ForEach-Object {
         $_ | Get-Content |
-            gc.exe responsemgt responses create
+            gc.exe responsemanagement responses create
     }
 
 # for f in canned*;do cat "$f" | gc responsemgt responses create;done

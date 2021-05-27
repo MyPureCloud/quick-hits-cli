@@ -14,7 +14,7 @@
 gc users list -a --pageSize=100 --expand="authorization" | jq -c '.[] | select( .authorization.roles[].name | contains("Supervisor"))' | jq .id > authorizations-user.json
  
 # Step #2: Find the id of the Queue by retrieving all of the queues and using jq to parse the id of the file
-gc queues list -a --pageSize=100 --name="MyQueueName" | jq -r .[].id
+gc routing queues list -a --pageSize=100 --name="MyQueueName" | jq -r .[].id
 
 # Step #3:  Find out the total number of users with that division
 cat authorizations-user.json | jq .[].id | wc -l
@@ -31,6 +31,6 @@ do
    cat authorizations-user.json | jq -r ".[$userIndex:$userFinal] | map({id: .id, username: .username, joined    : true})" > /tmp/joinedUsers-${i}.json
 
    # Add the users with the command below.  If you want to delete these users instead of adding them pass in the --delete=true flag
-   gc queues users move QUEUE_ID_HERE -f /tmp/joinedUsers-${i}.json
+   gc routing queues members move QUEUE_ID_HERE -f /tmp/joinedUsers-${i}.json
 done
 # >> END cli-assign-to-queue-by-role

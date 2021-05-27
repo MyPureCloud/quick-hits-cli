@@ -7,13 +7,13 @@
 #   DEST_OAUTH_CLIENT
 #######
 
-gc --p SOURCE_OAUTH_CLIENT skills list > skills.json                                           # Dump all of the queues out of the target org into a file
-cat skills.json |  jq 'map(del(.id, .dateModified, .version, .selfUri))' > input.json          # Get rid of all of the ids and create dates and dump into another file
+gc --p SOURCE_OAUTH_CLIENT routing skills list > skills.json                                   # Dump all of the skills out of the target org into a file
+cat skills.json |  jq 'map(del(.id, .dateModified, .version, .selfUri))' > input.json          # Get rid of all unneeded properties then dump into another file
 jq -cr 'keys[] as $k | "\($k)\n\(.[$k])"' input.json |                                         # Shell command to split each record into a file
                         while read -r key ; do
                         read -r item
                         printf "%s\n" "$item" > "/tmp/skills/skills-$key.json"
         done
-ls /tmp/skills-*.json  | xargs -I{} gc -p DEST_OAUTH_CLIENT skills create -f {}                # Take all the file names and use the cli to create the queue
+ls /tmp/skills-*.json  | xargs -I{} gc -p DEST_OAUTH_CLIENT routing skills create -f {}        # Take all the file names and use the cli to create the skills
 
 # >> END cli-skill-creation

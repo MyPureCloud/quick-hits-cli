@@ -10,7 +10,7 @@
 #>
 
 Get-Content -Path ".\query-api-usage-for-week.json" |
-    gc.exe usage query -t 10 | ConvertFrom-Json |
+    gc.exe usage query create -t 10 | ConvertFrom-Json |
     Select-Object -ExpandProperty results |
     Sort-Object -Property date, clientName |
     Select-Object date, clientName, templateUri, requests, status200, status300, status400, status429, status500 | 

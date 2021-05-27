@@ -11,7 +11,7 @@
 }
 
 # Step 2: Create a subscription to a set of topics for the channel
-cat subscriptions.json | gc notifications subscriptions subscribe streaming-2-aa5h48uk0srhpugh2994klj918  #The channel created in step #1
+cat subscriptions.json | gc notifications channels subscriptions subscribe streaming-2-aa5h48uk0srhpugh2994klj918  #The channel created in step #1
 
 #The content of the subscriptions.json is shown here
 [

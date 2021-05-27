@@ -23,7 +23,7 @@
     Out-File -FilePath .\authorizations-user.txt
  
 # Step #2: Find the id of the target Queue and set it to a variable
-(gc.exe queues list -a --name="Grocery_Queue" | ConvertFrom-Json) | 
+(gc.exe routing queues list -a --name="Grocery_Queue" | ConvertFrom-Json) | 
     Select-Object -First 1 -ExpandProperty id |
     Set-Variable -Name "queueId"
 
@@ -48,7 +48,7 @@ Get-Content -ReadCount $batchSize -Path ".\authorizations-user.txt" |
             Out-File -FilePath ".\users_batch-$(($i)).json"
 
         # Invoke the gc cli to add the users from the JSON file
-        gc.exe queues users move $queueId -f ".\users_batch-${i}.json"
+        gc.exe routing queues members move $queueId -f ".\users_batch-${i}.json"
 
         $i++    # Increment loop index
     } { Write-Host "Finished assigning users to Queue"}
