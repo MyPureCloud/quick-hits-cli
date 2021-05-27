@@ -1,0 +1,6 @@
+{
+  "description": "Service Provider X",
+  "startPhoneNumber": "+13175559900",
+  "endPhoneNumber": "+13175559910",
+  "comments": "DIDs for call flows"
+}
