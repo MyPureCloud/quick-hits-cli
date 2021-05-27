@@ -31,13 +31,13 @@ removeSkills.forEach(skill => {
             skillArr = user.skills.find(x => x.name == skill);
 
             // Remove skill for each user
-            execSync('gc users skills delete '+ user.id +' '+ skillArr.id +'');
-            console.log('EXECUTING SCRIPT: gc users skills delete '+ user.id +' '+ skillArr.id +'');
+            execSync('gc users routingskills delete '+ user.id +' '+ skillArr.id +'');
+            console.log('EXECUTING SCRIPT: gc users routingskills delete '+ user.id +' '+ skillArr.id +'');
             console.log('Removed Skill ' + skill + ' for user ' + user.name+'');
 
             // Bulk add skills for each user
-            execSync('gc users skills bulkremove '+ user.id +' -f ./bulk-add-skills.json');
-            console.log('EXECUTING SCRIPT: gc users skills bulkremove '+ user.id +' -f ./bulk-add-skills.json');
+            execSync('gc users routingskills bulkremove '+ user.id +' -f ./bulk-add-skills.json');
+            console.log('EXECUTING SCRIPT: gc users routingskills bulkremove '+ user.id +' -f ./bulk-add-skills.json');
             console.log('Added Skills for user ' + user.name+'');
 
             // bulk-add-skills.json file contents

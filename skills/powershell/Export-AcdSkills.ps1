@@ -12,7 +12,7 @@
         PowerShell v5.1 and up
 #>
 
-gc.exe -p SOURCE_OAUTH_CLIENT routing skills list -a > skills.json          # Dump all of the skills out of the target org into a file
+gc.exe -p SOURCE_OAUTH_CLIENT routing skills list -a > skills.json  # Dump all of the skills out of the target org into a file
 (Get-Content -Path ".\skills.json" | ConvertFrom-Json) |            
     Select-Object name |                                            # Retain only the name property
     ForEach-Object { $i = 0 } {                                     # Split each record into its own file

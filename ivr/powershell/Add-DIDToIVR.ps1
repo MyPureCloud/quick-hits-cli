@@ -19,19 +19,19 @@ $ivrId = "f833e1cc-96a0-4db5-977d-4b942cdf7341"
 
 # OR 
 # if you only have the IVR name, you can get the ID by running this:
-$ivrId = (gc.exe ivr list --name "-- EXACT IVR NAME --" -a | 
+$ivrId = (gc.exe architect ivrs list --name "-- EXACT IVR NAME --" -a | 
     ConvertFrom-Json) | Select-Object -ExpandProperty id | Write-Output
 
 
 # Assign DIDs to the IVR. 
 # Note: This will replace the existing DID configuration from the IVR
-gc.exe ivr get $ivrId | ConvertFrom-Json |              # Get the current configuration of the IVR.  
+gc.exe architect ivrs get $ivrId | ConvertFrom-Json |              # Get the current configuration of the IVR.  
     Select-Object * -ExcludeProperty dnis, version |    # Remove the dnis and version properties
     # Add the dnis phone numbers array as the dnis property
     Add-Member -PassThru `
                -MemberType NoteProperty `
                -Name dnis -Value $dnisArray |
     ConvertTo-Json -Depth 10 |
-    gc.exe ivr update $ivrId                            # Invoke the Genesys Cloud API to execute the changes
+    gc.exe architect ivrs update $ivrId                            # Invoke the Genesys Cloud API to execute the changes
 
 # >> END Add-DIDToIVR
