@@ -25,7 +25,7 @@
     Where-Object name -eq "Support" |
     Select-Object id | 
     ForEach-Object { 
-        (gc.exe routing queues members get $_.id -a | ConvertFrom-Json) | 
+        (gc.exe routing queues members list $_.id -a | ConvertFrom-Json) | 
             Select-Object @{Name="id"; Expression={$_.user.id}}, @{Name="username"; Expression={$_.user.username}} |  
             Export-Csv -Path ".\users_of_queue.csv" -NoTypeInformation
     } 
