@@ -1,4 +1,4 @@
-# >> START Connect-NotificationsChannel.
+# >> START Connect-NotificationsChannel Subscribe to notification events from the command line
 
 <# 
     .DESCRIPTION
@@ -28,7 +28,7 @@ gc.exe notifications channels create |
 # Step 2: Create a subscription to a set of topics for the channel
 ####
 
-Get-Content "subscriptions.json" | gc.exe notifications subscriptions subscribe $channelId
+Get-Content "subscriptions.json" | gc.exe notifications channels subscriptions subscribe $channelId
 # channelId contains the if of the channel created in Step 1
 
 #The content of the subscriptions.json is shown here
@@ -66,4 +66,4 @@ gc.exe notifications channels listen $channelId |
     }
 
 
-# >> END subscribe_to_notification_events
+# >> END Connect-NotificationsChannel

@@ -34,14 +34,14 @@ def getId(gcObject,name):
 def moveUsersQueue(userIndex,userFinal,queueId,deleteUsers):
    mapCmd = '{id: .id, username: .username, joined : true}'
    if deleteUsers==True:
-     return execute(''' cat export/users_in_group.json |  jq -r ".[{}:{}] | map({})" |  gc queues users move --delete=true {} '''.format(userIndex,userFinal,mapCmd,queueId))
+     return execute(''' cat export/users_in_group.json |  jq -r ".[{}:{}] | map({})" |  gc routing queues members move --delete=true {} '''.format(userIndex,userFinal,mapCmd,queueId))
    else:
-     return execute(''' cat export/users_in_group.json |  jq -r ".[{}:{}] | map({})" |  gc queues users move {} '''.format(userIndex,userFinal,mapCmd,queueId))
+     return execute(''' cat export/users_in_group.json |  jq -r ".[{}:{}] | map({})" |  gc routing queues members move {} '''.format(userIndex,userFinal,mapCmd,queueId))
   
 # Start of main  
 groupId = getId("groups",groupName) 
-srcQueueId = getId("queues",srcQueue) 
-destQueueId = getId("queues",destQueue) 
+srcQueueId = getId("routing queues",srcQueue) 
+destQueueId = getId("routing queues",destQueue) 
 
 #Find all the members in that group and dump them to a file
 results = execute(''' gc groups members list -a --pageSize=100 {}  > export/users_in_group.json '''.format(groupId))

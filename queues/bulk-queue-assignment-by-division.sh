@@ -14,7 +14,7 @@
 gc users list -a --pageSize=100 > users.json
 
 # Step #2: Find the id of the Queue by retrieving all of the queues and using jq to parse the id of the file
-gc queues list -a --pageSize=100 --name="MyQueueName" | jq -r .[].id
+gc routing queues list -a --pageSize=100 --name="MyQueueName" | jq -r .[].id
 
 # Step #3:  Find all of the users who belong to the division and them to a file
 cat users.json | jq -c '.[] | select( .division.name | contains("MyDivisionsName"))' | jq -n  '[inputs]'| jq > divisions-user.json
@@ -34,6 +34,6 @@ do
    cat group-user.json | jq -r ".[$userIndex:$userFinal] | map({id: .id, username: .username, joined    : true})" > /tmp/joinedUsers-${i}.json
 
    # Add the users with the command below.  If you want to delete these users instead of adding them pass in the --delete=true flag
-   gc queues users move QUEUE_ID_HERE -f /tmp/joinedUsers-${i}.json
+   gc routing queues members move QUEUE_ID_HERE -f /tmp/joinedUsers-${i}.json
 done
 # >> END cli-assign-to-queue-by-division

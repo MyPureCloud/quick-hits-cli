@@ -15,16 +15,16 @@ destOrg   = sys.argv[2]
 timestr= time.strftime("%Y%m%d-%H%M%S")
 
 print("Beginning Export")
-actions = [["skills","--pageSize=100", ".id, .dateModified, .version, .selfUri"],
+actions = [["routing skills","--pageSize=100", ".id, .dateModified, .version, .selfUri"],
            ["groups", "--pageSize=100", ".id, .dateModified, .version, .memberCount,.chat,.owners,.selfUri"], 
-           ["roles", "--pageSize=100", ".id, .dateModified, .version, .userCount,.selfUri"],
-           ["queues","--pageSize=100", ".id, .division, .selfUri, .dateCreated, .createdBy"],
+           ["authorization roles", "--pageSize=100", ".id, .dateModified, .version, .userCount,.selfUri"],
+           ["routing queues","--pageSize=100", ".id, .division, .selfUri, .dateCreated, .createdBy"],
            ["locations","--pageSize=100", ".id, .division, .selfUri, .dateCreated, .createdBy"],
            ["users", '--pageSize=150 --expand="authorization, groups,skills,languages,geolocation,station,team,location"', ".id, .division, .selfUri, .dateCreated, .createdBy,.roles"]]
 
 for action in actions:
   print("Exporting {} from {}".format(action[0], sourceOrg))
-  cmd = "gc --profile {} {} list -a --pageSize=100 {} > export/{}-{}.json".format(sourceOrg, action[0], action[1],timestr,action[0])
+  cmd = "gc --profile {} {} list -a --pageSize=100 {} > export/{}-{}.json".format(sourceOrg, action[0], action[1],timestr,action[0].replace(' ','-'))
   output,error = subprocess.Popen(['/bin/bash', '-c', cmd], stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
   print(error)
 

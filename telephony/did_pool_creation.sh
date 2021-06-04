@@ -11,7 +11,7 @@
 #  }
 # 
 
-gc edges didpools create -f new-did-pool.json
+gc telephony providers edges didpools create -f new-did-pool.json
 
 
 # >> END create-did-pool

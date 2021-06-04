@@ -19,7 +19,7 @@ Write-Output @{
     startPhoneNumber = "+13175550000"   # Starting phone number for the range. Must be in E-164 format 
     endPhoneNumber = "+13175550099"     # Ending phone number for the range. Must be in E-164 format
 } | ConvertTo-Json |
-    gc.exe edges didpools create        # gc cli command to create the DID pool
+    gc.exe telephony providers edges didpools create        # gc cli command to create the DID pool
 
 
 # Create a DID pool from a pre-defined JSON file.
@@ -32,6 +32,6 @@ Write-Output @{
         "endPhoneNumber": "+13175559910"
     }
 #>
-Get-Content "new-did-pool.json" | gc.exe edges didpools create
+Get-Content "new-did-pool.json" | gc.exe telephony providers edges didpools create
 
 # >> END New-DIDPool
