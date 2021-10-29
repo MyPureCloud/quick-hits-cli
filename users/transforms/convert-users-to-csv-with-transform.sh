@@ -1,4 +1,4 @@
-# >> START convert-users-to-csv-with-transform.csv Use the experimental transform feature in the CLI along with a Go template to create CSV file
+# >> START convert-users-to-csv-with-transform Use the experimental transform feature in the CLI along with a Go template to create CSV file
 
 ########
 #  This template file will be used to transform all users who have the title of Agent from a JSON to CSV format (Select fields)
@@ -10,3 +10,5 @@
 
 # GC CLI command invoking the template 
 gc users list -a --transform code/users_to_csv.tmpl
+
+>> END convert-users-to-csv-with-transform
