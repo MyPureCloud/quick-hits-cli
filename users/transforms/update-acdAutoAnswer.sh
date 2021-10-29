@@ -21,4 +21,4 @@ gc users list -a --transform acdautoansweron_bulk.tmpl
 # To transform the output and then redirect it to the bulk update.  Remember the gc users bulk update API can only update a total of 50 records.
 gc users list -a --transform acdautoansweron_bulk.tmpl | gc users bulk update
 
-# >> END convert-users-to-csv-with-transform
+# >> END update-acdAutoAnswer
