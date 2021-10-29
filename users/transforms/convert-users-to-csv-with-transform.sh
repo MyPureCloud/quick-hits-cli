@@ -11,4 +11,4 @@
 # GC CLI command invoking the template 
 gc users list -a --transform code/users_to_csv.tmpl
 
->> END convert-users-to-csv-with-transform
+# >> END convert-users-to-csv-with-transform
