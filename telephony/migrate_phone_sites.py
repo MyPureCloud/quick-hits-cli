@@ -2,8 +2,7 @@
 # >> START delete-unused-webrtc Determine unused WebRTC phones and delete them
 
 """
-This script provides an example on how to delete WebRTC phones that are not assigned to any users or assigned previously 
-to users which are now inactive or deleted.
+This script provides an example on how to migrate phones from one site to another
 
 Python(3.6+)
 Genesys Cloud CLI (v13.0.0+)
@@ -20,7 +19,6 @@ def _execute(cmd, input=None):
     print(result.stdout)
     return json.loads(result.stdout)
 
-
 def change_phone_site(phone, new_site_id):
     """Edit a Phone with the id parameter"""
     phone['site']['id'] = new_site_id
@@ -31,7 +29,7 @@ def change_phone_site(phone, new_site_id):
 
 
 def migrate_phone_sites(old_site_id, new_site_id):
-    """Delete all of the unassigned WebRTC Phones in the Genesys Cloud org"""
+    """Migrate all phones from old site to new site"""
     
     # Query all Phones
     phones = _execute('gc telephony providers edges phones list -a --expand lines')
