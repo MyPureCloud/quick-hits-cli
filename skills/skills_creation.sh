@@ -2,7 +2,7 @@
 
 
 ######## 
-#   Exports the skilles definitions from one Genesys Cloud organization and re-creates them in another.  This will take all of the queues from the SOURCE_OAUTH_CLIENT and dump 
+#   Exports the skill definitions from one Genesys Cloud organization and re-creates them in another.  This will take all of the queues from the SOURCE_OAUTH_CLIENT and dump 
 #   them to a file. In the process, it removes the id, dateModified, version, selfUri fields from the JSON.  It then iterates through all of the files and recreates the skills in the 
 #   DEST_OAUTH_CLIENT
 #######
