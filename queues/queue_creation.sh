@@ -9,8 +9,8 @@ echo '{"name": "chat4"}' | gc routing queues create | jq -r .id
 #   DEST_OAUTH_CLIENT
 #######
 
-gc -p SOURCE_OAUTH_CLIENT routing queues list > queues.json                                                       # Dump all of the queues out of the target org into a file
-cat queues.json |  jq '.entities | map(del(.id, .division, .selfUri, .dateCreated, .createdBy))' > input.json          # Get rid of all of the ids and create dates and dump into another file
+gc -p SOURCE_OAUTH_CLIENT routing queues list -a > queues.json                                                       # Dump all of the queues out of the target org into a file
+cat queues.json |  jq 'map(del(.id, .division, .selfUri, .dateCreated, .createdBy))' > input.json          # Get rid of all of the ids and create dates and dump into another file
 jq -cr 'keys[] as $k | "\($k)\n\(.[$k])"' input.json |                                                     # Shell command to split each record into a file
                         while read -r key ; do
                         read -r item
